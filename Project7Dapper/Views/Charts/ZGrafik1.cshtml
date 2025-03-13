@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<Project7Dapper.Dtos.MostSeenDiseaseIn2020Dto>
 
-
-
 @{
     ViewData["Title"] = "ZGrafik1";
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
+<div style="margin-left:100px">
+<h3>Bar Chart</h3>
+</div>
+
 <br />
 <br />
 
+<div style="width: 800px; height: 800px; margin-left: 100px;">
+    <canvas id="myChart" width="800" height="800"></canvas>
+</div>
 
-<canvas id="myChart" width="500" height="350" style="margin-left:250px"></canvas>
-
+@* <canvas id="myChart" width="500" height="350" style="margin-left:250px"></canvas>
+ *@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var labels = [];
