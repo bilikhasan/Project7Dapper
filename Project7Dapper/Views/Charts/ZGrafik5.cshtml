@@ -1,0 +1,74 @@
+﻿@model List<Project7Dapper.Dtos.The10MostCommonDiseasesInWomenAndMenIn2020>
+
+@{
+    ViewData["Title"] = "ZGrafik5";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<br />
+<br />
+
+<div style="width: 800px; height: 800px; margin-left: 100px;">
+    <canvas id="myChart" width="800" height="800"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var labels = [];
+    var values = [];
+    var genders = [];
+    var colors = [];
+
+    @foreach (var item in Model)
+    {
+        @: labels.push("@item.Disease_Name");
+        @: values.push(parseFloat("@item.Avg_Prevalence")); // Sayıya çevir
+        @: genders.push("@item.Gender");
+
+        // Cinsiyete göre renk belirle
+        @: if ("@item.Gender" === "Male") {
+        @: colors.push('rgba(54, 162, 235, 0.7)'); // Mavi (Erkek)
+        @: } else {
+        @: colors.push('rgba(255, 99, 132, 0.7)'); // Kırmızı (Kadın)
+        @: }
+    }
+
+    console.log("Labels:", labels);
+    console.log("Values:", values);
+    console.log("Genders:", genders);
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut', // Doughnut Chart
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Hastalık Yaygınlık Oranı (%)',
+                data: values,
+                backgroundColor: colors,
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: { size: 18 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return labels[tooltipItem.dataIndex] + ' - ' +
+                                   genders[tooltipItem.dataIndex] +
+                                   ': ' + tooltipItem.raw + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

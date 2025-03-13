@@ -1,0 +1,96 @@
+﻿@model IPagedList<Project7Dapper.Dtos.ResultStatisticsDto>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "GetAllStatistics";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<div class="container">
+    <br /><br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Country</th>
+            <th>Year</th>
+            <th>Disease Name</th>
+            <th>Disease Category </th>
+            <th>Mortality Rate </th>
+            <th>Age Group </th>
+            <th>Population Affected</th>
+            <th>Doctors per 1000</th>
+            <th>Treatment Type</th>
+            <th>Recovery Rate </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Country</td>
+                <td>@item.Year</td>
+                <td>@item.Disease_Name</td>
+                <td>@item.Disease_Category</td>
+                <td>@item.Mortality_Rate</td>
+                <td>@item.Age_Group</td>
+                <td>@item.Population_Affected</td>
+                <td>@item.Doctors_per_1000</td>
+                <td>@item.Treatment_Type</td>
+                <td>@item.Recovery_Rate</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("GetAllStatistics", new { page }))
+</div>
+
+<style>
+    .pagination-wrapper {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: inline-flex;
+        list-style: none;
+        padding: 0;
+    }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+            .pagination li a {
+                display: block;
+                padding: 8px 12px;
+                text-decoration: none;
+                background-color: #f8f9fa;
+                color: #007bff;
+                border: 1px solid #dee2e6;
+                border-radius: 4px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .pagination li a:hover {
+                    background-color: #007bff;
+                    color: #ffffff;
+                }
+
+            .pagination li.active a {
+                background-color: #28a745;
+                color: #ffffff;
+                border-color: #28a745;
+                font-weight: bold;
+                pointer-events: none;
+                cursor: default;
+            }
+
+            .pagination li.disabled a {
+                background-color: #e9ecef;
+                color: #6c757d;
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+</style>

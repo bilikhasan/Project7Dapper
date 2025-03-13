@@ -1,0 +1,53 @@
+﻿@model List<Project7Dapper.Dtos.TheHighestDiseaseSpreadRateDto>
+
+@{
+    ViewData["Title"] = "Zgrafik2";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<br />
+<br />
+
+<canvas id="myChart" width="500" height="350" style="margin-left:250px"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var labels = [];
+    var values = [];
+    var colors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
+    var borderColors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
+
+    @foreach (var item in Model)
+    {
+        @: labels.push("@item.Country - @item.Disease_Name");
+        @: values.push(@item.Max_Prevalence);
+    }
+
+    var dynamicColors = labels.map((_, i) => colors[i % colors.length]);
+    var dynamicBorderColors = labels.map((_, i) => borderColors[i % borderColors.length]);
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ülke Bazında En Yaygın Hastalıklar (2020)',
+                data: values,
+                backgroundColor: dynamicColors,
+                borderColor: dynamicBorderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

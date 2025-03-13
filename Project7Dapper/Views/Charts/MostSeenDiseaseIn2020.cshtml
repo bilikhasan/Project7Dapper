@@ -1,0 +1,225 @@
+﻿@model List<Project7Dapper.Dtos.ResultStatisticsDto>
+
+@{
+    ViewData["Title"] = "MostSeenDiseaseIn2020";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<br />
+<div class="container">
+<h3>Dünya Genelinde Sağlık Trendleri ve Hastalık Analizleri</h3>
+</div>
+<div class="container">
+    <div class="row justify-content-center gx-3">
+        <!-- Burada gx-3 boşluk ekler -->
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.TheHighestDiseaseSpreadRate != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">En Yüksek Hastalık Yayılma Oranına Sahip Ülkeler</h3>
+                            <table class="table table-bordered table-striped table-hover text-light">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">Ülke</th>
+                                        <th class="text-center">Hastalık Adı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.TheHighestDiseaseSpreadRate)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Country</td>
+                                            <td class="text-center">@item.Disease_Name</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: En yaygın hastalıkların hangi ülkelerde daha fazla görüldüğünü belirlemek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 1 - warning *@
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.DiseasesWithTheHighestMortalityRatesIn2020 != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">2020'de En Yüksek Ölüm Oranına Sahip Hastalıklar</h3>
+                            <table class="table table-bordered table-striped table-hover text-light">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">Hastalık Adı</th>
+                                        <th class="text-center">Hastalık Kategorisi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DiseasesWithTheHighestMortalityRatesIn2020)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Disease_Name</td>
+                                            <td class="text-center">@item.Disease_Category</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: Son yıllarda ölüm oranı en yüksek hastalıkları analiz etmek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 2 - success *@
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.The10MostCommonDiseasesInWomenAndMenIn2020 != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">2020'de Kadın ve Erkeklerde En Yaygın 10 Hastalık</h3>
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center text-light">Hastalık Adı</th>
+                                        <th class="text-center text-light">Cinsiyet</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.The10MostCommonDiseasesInWomenAndMenIn2020)
+                                    {
+                                        <tr>
+                                            <td class="text-center text-light">@item.Disease_Name</td>
+                                            <td class="text-center text-light">@item.Gender</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: Cinsiyet bazında en yaygın hastalıkları görmek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 3 - primary *@
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.DiseasesWithTheMostExpensiveTreatments != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">En Yüksek Tedavi Maliyetine Sahip Hastalıklar</h3>
+                            <table class="table table-bordered table-striped table-hover text-light">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">Hastalık Adı</th>
+                                        <th class="text-center">Kategorisi</th>
+                                        <th class="text-center">Maliyet ($)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DiseasesWithTheMostExpensiveTreatments)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Disease_Name</td>
+                                            <td class="text-center">@item.Disease_Category</td>
+                                            <td class="text-center">@item.Avg_Cost</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: En yüksek tedavi maliyetine sahip hastalıkları belirlemek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 4 - warning *@
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.CountriesWithTheLowestHealthcareAccess != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">En Düşük Sağlık Hizmeti Erişimi Olan Ülkeler</h3>
+                            <table class="table table-bordered table-striped table-hover text-light">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">Ülke</th>
+                                        <th class="text-center">Ortalama Sağlık Erişimi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.CountriesWithTheLowestHealthcareAccess)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Country</td>
+                                            <td class="text-center">@(Convert.ToDecimal(item.Avg_Healthcare_Access).ToString("N2")) </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: Sağlık hizmetlerine erişimi en düşük olan ülkeleri analiz etmek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 5 - success *@
+
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    @if (ViewBag.CountriesWithTheMostDoctors != null)
+                    {
+                        <div class="table-responsive">
+                            <h3 class="text-center mt-3 mb-4 text-light fw-bold">En Fazla Doktor Sayısına Sahip Ülkeler</h3>
+                            <table class="table table-bordered table-striped table-hover text-light">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">Ülke</th>
+                                        <th class="text-center">Ortalama Doktor Sayısı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.CountriesWithTheMostDoctors)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@item.Country</td>
+                                            <td class="text-center">@(Convert.ToDecimal(item.Avg_Doctors).ToString("N2")) </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    💡 Amaç: Nüfusa oranla en fazla doktor bulunan ülkeleri belirlemek.
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>  @* 7 - primary *@
+
+
+
+    </div>
+</div>
