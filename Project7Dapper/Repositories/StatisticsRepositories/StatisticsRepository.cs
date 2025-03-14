@@ -120,5 +120,13 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
             var values = await connection.QueryAsync<The10MostCommonDiseasesInWomenAndMenIn2020>(query, commandTimeout: 300);
             return values.ToList();
         }
+
+        public async Task<List<CountriesWithTheLowestHealthcareAccessDto>> ZGrafik6()
+        {
+            string query = "SELECT top 10 Country, AVG(Healthcare_Access) AS Avg_Healthcare_Access FROM GlobalHealthStatistics GROUP BY Country ORDER BY Avg_Healthcare_Access asc";
+            var connection = _context.CreateConnection();
+            var values = await connection.QueryAsync<CountriesWithTheLowestHealthcareAccessDto>(query, commandTimeout: 300);
+            return values.ToList();
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
         Task<List<ResultStatisticsDto>> GettAllStatisticsAsync();
         Task<MostSeenDiseaseIn2020Dto> MostSeenDiseasein2020Async();
 
-
         Task<List<TheHighestDiseaseSpreadRateDto>> TheHighestDiseaseSpreadRateAsync();
         Task<List<DiseasesWithTheHighestMortalityRatesIn2020>> DiseasesWithTheHighestMortalityRatesIn2020Async();
         Task<List<The10MostCommonDiseasesInWomenAndMenIn2020>> The10MostCommonDiseasesInWomenAndMenIn2020Async();
@@ -26,6 +25,9 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
         Task<List<DiseasesWithTheMostExpensiveTreatmentsDto>> ZGrafik3();
         Task<List<DiseasesWithTheHighestMortalityRatesIn2020>> ZGrafik4();
         Task<List<The10MostCommonDiseasesInWomenAndMenIn2020>> ZGrafik5();
+        Task<List<CountriesWithTheLowestHealthcareAccessDto>> ZGrafik6();
+
+
 
     }
 }

@@ -104,5 +104,10 @@ namespace Project7Dapper.Controllers
             var The10MostCommonDiseaseInWomenAndMenIn2020 = await _statisticsRepository.ZGrafik5();
             return View(The10MostCommonDiseaseInWomenAndMenIn2020);
         }
+        public async Task<IActionResult> ZGrafik6()
+        {
+            var CountriesWithTheLowestHealthcareAccess = await _statisticsRepository.ZGrafik6();
+            return View(CountriesWithTheLowestHealthcareAccess);
+        }
     }
 }

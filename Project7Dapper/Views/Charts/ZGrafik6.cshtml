@@ -1,0 +1,97 @@
+﻿@model List<Project7Dapper.Dtos.CountriesWithTheLowestHealthcareAccessDto>
+
+
+@{
+    ViewData["Title"] = "ZGrafik6";
+    Layout = "~/Views/_DashboardLayout.cshtml";
+}
+
+<div style="margin-left:100px">
+    <h3>Bubble Chart - Healthcare Access</h3>
+</div>
+
+<br />
+<br />
+
+<div style="width: 800px; height: 800px; margin-left: 100px;">
+    <canvas id="myChart" width="800" height="800"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var dataPoints = [];
+    var labels = [];
+    var index = 1;
+
+    // C# Model Verisini JSON Formatında JavaScript'e Aktarıyoruz
+    var modelData = @Html.Raw(Json.Serialize(Model));
+
+    modelData.forEach(function (item) {
+        let access = parseFloat(item.Healthcare_Access); // Sağlık erişimi verisi
+        let avgAccess = parseFloat(item.Avg_Healthcare_Access); // Ortalama sağlık erişimi
+
+        // Eğer değerler 0 veya negatifse, görünürlüğü artırmak için küçük bir değer ekleyelim
+        if (access <= 0) access = 1;
+        if (avgAccess <= 0) avgAccess = 1;
+
+        dataPoints.push({
+            x: index,
+            y: access, // Sağlık erişimi Y eksenine koyduk
+            r: avgAccess * 2 // Balon büyüklüğünü ortalama sağlık erişimine göre ayarladık
+        });
+
+        labels.push(item.Country);
+        index++;
+    });
+
+    console.log("Data Points:", dataPoints);
+    console.log("Labels:", labels);
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Sağlık Hizmetlerine Erişim (%)',
+                data: dataPoints,
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    ticks: {
+                        callback: function(value) {
+                            return labels[value - 1] || ''; // Ülke isimlerini X eksenine koy
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100, // Sağlık hizmeti erişimi %100 üzerinden ölçüleceği için 100 belirledik
+                    title: {
+                        display: true,
+                        text: 'Healthcare Access (%)'
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            var country = labels[tooltipItem.raw.x - 1];
+                            return country + ': ' + tooltipItem.raw.y + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
