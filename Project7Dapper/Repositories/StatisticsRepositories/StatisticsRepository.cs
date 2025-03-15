@@ -128,5 +128,13 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
             var values = await connection.QueryAsync<CountriesWithTheLowestHealthcareAccessDto>(query, commandTimeout: 300);
             return values.ToList();
         }
+
+        public async Task<List<CountriesWithTheMostDoctors>> ZGrafik7()
+        {
+            string query = "SELECT top 10 Country, AVG(Doctors_per_1000) AS Avg_Doctors FROM GlobalHealthStatistics GROUP BY Country ORDER BY Avg_Doctors DESC";
+            var connection = _context.CreateConnection();
+            var values = await connection.QueryAsync<CountriesWithTheMostDoctors>(query, commandTimeout: 300);
+            return values.ToList();
+        }
     }
 }

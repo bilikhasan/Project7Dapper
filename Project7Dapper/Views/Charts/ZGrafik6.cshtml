@@ -6,10 +6,10 @@
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
 
-<div style="margin-left:100px">
-    <h3>Bubble Chart - Healthcare Access</h3>
-</div>
 
+<div style="margin-left:100px">
+    <h3>Horizontal Line Chart</h3>
+</div>
 <br />
 <br />
 
@@ -19,77 +19,43 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var dataPoints = [];
     var labels = [];
-    var index = 1;
+    var values = [];
+    var colors = ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)',
+                  'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'];
+    var borderColors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
 
-    // C# Model Verisini JSON Formatında JavaScript'e Aktarıyoruz
-    var modelData = @Html.Raw(Json.Serialize(Model));
+    @foreach (var item in Model)
+    {
+        @: labels.push("@item.Country");
+        @: values.push(@item.Avg_Healthcare_Access);
+    }
 
-    modelData.forEach(function (item) {
-        let access = parseFloat(item.Healthcare_Access); // Sağlık erişimi verisi
-        let avgAccess = parseFloat(item.Avg_Healthcare_Access); // Ortalama sağlık erişimi
-
-        // Eğer değerler 0 veya negatifse, görünürlüğü artırmak için küçük bir değer ekleyelim
-        if (access <= 0) access = 1;
-        if (avgAccess <= 0) avgAccess = 1;
-
-        dataPoints.push({
-            x: index,
-            y: access, // Sağlık erişimi Y eksenine koyduk
-            r: avgAccess * 2 // Balon büyüklüğünü ortalama sağlık erişimine göre ayarladık
-        });
-
-        labels.push(item.Country);
-        index++;
-    });
-
-    console.log("Data Points:", dataPoints);
-    console.log("Labels:", labels);
+    // Bar sayısına göre renkleri tekrarlamak için
+    var dynamicColors = labels.map((_, i) => colors[i % colors.length]);
+    var dynamicBorderColors = labels.map((_, i) => borderColors[i % borderColors.length]);
 
     var ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
-        type: 'bubble',
+        type: 'bar',
         data: {
+            labels: labels,
             datasets: [{
-                label: 'Sağlık Hizmetlerine Erişim (%)',
-                data: dataPoints,
-                backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                label: 'Healthcare Access by Country',
+                data: values,
+                backgroundColor: dynamicColors,
+                borderColor: dynamicBorderColors,
                 borderWidth: 1
             }]
         },
         options: {
             responsive: false,
             maintainAspectRatio: false,
+            indexAxis: 'y', // Yatay çubuk grafiği için
             scales: {
                 x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    ticks: {
-                        callback: function(value) {
-                            return labels[value - 1] || ''; // Ülke isimlerini X eksenine koy
-                        }
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    min: 0,
-                    max: 100, // Sağlık hizmeti erişimi %100 üzerinden ölçüleceği için 100 belirledik
-                    title: {
-                        display: true,
-                        text: 'Healthcare Access (%)'
-                    }
-                }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            var country = labels[tooltipItem.raw.x - 1];
-                            return country + ': ' + tooltipItem.raw.y + '%';
-                        }
-                    }
+                    beginAtZero: true
                 }
             }
         }

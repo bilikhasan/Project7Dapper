@@ -4,7 +4,6 @@
     {
         public string Country { get; set; }
         public double Healthcare_Access { get; set; }
-
         public double Avg_Healthcare_Access { get; set; }
 
     }

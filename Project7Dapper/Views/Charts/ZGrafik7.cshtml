@@ -1,24 +1,21 @@
-﻿@model IEnumerable<Project7Dapper.Dtos.MostSeenDiseaseIn2020Dto>
+﻿@model List<Project7Dapper.Dtos.CountriesWithTheMostDoctors>
+
 
 @{
-    ViewData["Title"] = "ZGrafik1";
+    ViewData["Title"] = "ZGrafik7";
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
 
-
 <div style="margin-left:100px">
-<h3>Bar Chart</h3>
+    <h3>Polar Area Chart</h3>
 </div>
-
 <br />
 <br />
 
 <div style="width: 800px; height: 800px; margin-left: 100px;">
-    <canvas id="myChart" width="800" height="800"></canvas>
+    <canvas id="myPolarChart" width="800" height="800"></canvas>
 </div>
 
-@* <canvas id="myChart" width="500" height="350" style="margin-left:250px"></canvas>
- *@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var labels = [];
@@ -30,35 +27,29 @@
 
     @foreach (var item in Model)
     {
-        @: labels.push("@item.Disease_Name");
-        @: values.push(@item.CaseCount);
+        @: labels.push("@item.Country");
+        @: values.push(@item.Avg_Doctors);
     }
 
-    // Bar sayısına göre renkleri tekrarlamak için
+    // Polar Area Chart için renkleri döngüyle atıyoruz
     var dynamicColors = labels.map((_, i) => colors[i % colors.length]);
-    var dynamicBorderColors = labels.map((_, i) => borderColors[i % borderColors.length]);
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myPolarChart').getContext('2d');
     new Chart(ctx, {
-        type: 'bar',
+        type: 'polarArea',
         data: {
             labels: labels,
             datasets: [{
-                label: 'Hastalık Bazında Vaka Sayısı (2020)',
+                label: 'Average Doctors by Country',
                 data: values,
                 backgroundColor: dynamicColors,
-                borderColor: dynamicBorderColors,
+                borderColor: dynamicColors,
                 borderWidth: 1
             }]
         },
         options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+            responsive: true,
+            maintainAspectRatio: false
         }
     });
 </script>

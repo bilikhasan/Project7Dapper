@@ -109,5 +109,11 @@ namespace Project7Dapper.Controllers
             var CountriesWithTheLowestHealthcareAccess = await _statisticsRepository.ZGrafik6();
             return View(CountriesWithTheLowestHealthcareAccess);
         }
+
+        public async Task<IActionResult> ZGrafik7()
+        {
+            var CountriesWithTheMostDoctors = await _statisticsRepository.ZGrafik7();
+            return View(CountriesWithTheMostDoctors);
+        }
     }
 }

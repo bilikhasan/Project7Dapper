@@ -26,7 +26,7 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
         Task<List<DiseasesWithTheHighestMortalityRatesIn2020>> ZGrafik4();
         Task<List<The10MostCommonDiseasesInWomenAndMenIn2020>> ZGrafik5();
         Task<List<CountriesWithTheLowestHealthcareAccessDto>> ZGrafik6();
-
+        Task<List<CountriesWithTheMostDoctors>> ZGrafik7();
 
 
     }
