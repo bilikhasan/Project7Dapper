@@ -28,7 +28,8 @@ In this project, I worked with the Global Health Statistics dataset, containing 
 
 
 
-LinkedIn : 
+LinkedIn : https://www.linkedin.com/posts/hasanbilik_dotnetcore-aspnetcore-webdevelopment-activity-7307047171457970176--9mE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC6XsM8BG_mzn7-1fYWSBztGwB5p-SlVd1E
+
 Kaggle Dataset: https://www.kaggle.com/datasets/malaiarasugraj/global-health-statistics
 
 #dotnetcore #aspnetcore #webdevelopment #dataanalysis #datascience #softwareengineering #fullstackdeveloper #sqlserver #dapper #entityframework #chartjs #bootstrap #developer #techinnovation #dashboarddesign #datavisualization
