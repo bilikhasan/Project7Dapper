@@ -1,4 +1,4 @@
-![11](https://github.com/user-attachments/assets/0e87507b-f745-437b-a642-02953fb50677)Hello Everyone,
+Hello Everyone,
 
 Proud to share that I have successfully completed another project (DAPPER) as part of the Full Stack .NET Core Development course at M&Y Yazılım Eğitim Akademi Danışmanlık , under the mentorship of @Murat Yücedağ and Erhan Gündüz.
 
