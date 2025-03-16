@@ -56,7 +56,6 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
             return values.ToList();
         }
 
-
         public async Task<MostSeenDiseaseIn2020Dto> MostSeenDiseasein2020Async()
         {
             string query = "SELECT TOP 1  Disease_Name, COUNT (*) AS CaseCount FROM GlobalHealthStatistics WHERE Year = 2020 GROUP BY Disease_Name ORDER BY CaseCount DESC;";

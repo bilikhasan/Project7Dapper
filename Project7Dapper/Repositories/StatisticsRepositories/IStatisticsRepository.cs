@@ -16,10 +16,6 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
 
 
 
-
-
-
-
         Task<List<MostSeenDiseaseIn2020Dto>> ZGrafik1();
         Task<List<TheHighestDiseaseSpreadRateDto>> ZGrafik2();
         Task<List<DiseasesWithTheMostExpensiveTreatmentsDto>> ZGrafik3();
@@ -27,6 +23,8 @@ namespace Project7Dapper.Repositories.StatisticsRepositories
         Task<List<The10MostCommonDiseasesInWomenAndMenIn2020>> ZGrafik5();
         Task<List<CountriesWithTheLowestHealthcareAccessDto>> ZGrafik6();
         Task<List<CountriesWithTheMostDoctors>> ZGrafik7();
+
+
 
 
     }

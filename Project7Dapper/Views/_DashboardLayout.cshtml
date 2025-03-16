@@ -24,14 +24,34 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+
+
+
+                
+@*         <form action="/Statistics/GetAllStatistics/" method="get" class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Arama yapın..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <input class="form-control" type="text" placeholder="1 Milyon Satırda Ara..." aria-label="Search for..." aria-describedby="btnNavbarSearch" name="q" />
+                <button type="submit" class="btn btn-outline-light mr-0">Bul</button>
+
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+
             </div>
         </form>
+
+
+        <form action="/Statistics/GetAllStatistics/" method="get" class="form-inline">
+            <input type="text" name="q" placeholder="1 Milyon Satırda Ara" class="form-control mr-2" />
+            <button type="submit" class="btn btn-outline-light mr-0">Bul</button>
+        </form> *@
+
+
+
+
+
+
+
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+       @*  <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -41,8 +61,13 @@
                     <li><a class="dropdown-item" href="#!">Logout</a></li>
                 </ul>
             </li>
-        </ul>
+        </ul> *@
     </nav>
+
+
+
+
+
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -67,37 +92,61 @@
                             Tables
                         </a>
 
-                        <!-- Alt Menü -->
-                        <div id="grafiklerSubMenu">
-                            <a class="nav-link" href="/Charts/ZGrafik1">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Bar Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik2">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Pie Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik3">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Line Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik4">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Radar (Spider) Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik5">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Doughnut Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik6">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Horizontal Line Chart
-                            </a>
-                            <a class="nav-link" href="/Charts/ZGrafik7">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Polar Area Chart
-                            </a>
-                        </div>
+
+
+                        <a class="nav-link" href="/Charts/ZGrafik1">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Bar Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik2">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Pie Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik3">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Line Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik4">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Radar (Spider) Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik5">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Doughnut Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik6">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Horizontal Line Chart
+                        </a>
+                        <a class="nav-link" href="/Charts/ZGrafik7">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Polar Area Chart
+                        </a>
+
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                let links = document.querySelectorAll(".nav-link");
+                                let currentUrl = window.location.pathname; // Tarayıcıdaki mevcut URL'yi al
+
+                                links.forEach(link => {
+                                    if (link.getAttribute("href") === currentUrl) {
+                                        link.classList.add("active"); // Eğer URL uyuşuyorsa class ekle
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <style>
+                            .nav-link.active {
+                                background-color: #007bff; /* Mavi arka plan */
+                                color: white !important; /* Beyaz yazı */
+                                font-weight: bold; /* Kalın yazı */
+                            }</style>
+
+
+
 
 
 

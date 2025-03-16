@@ -6,11 +6,30 @@
     ViewData["Title"] = "GetAllStatistics";
     Layout = "~/Views/_DashboardLayout.cshtml";
 }
+<br />
+
+<form method="get" action="@Url.Action("GetAllStatistics")" class="search-form">
+    <div class="search-container">
+        <input type="text" name="searchQuery" value="@ViewBag.SearchQuery" placeholder="Search in 1 Million Data" class="search-input" style="margin-left:200px; width: 300px;  font-size: 16px;" />
+    <button type="submit">Ara</button>
+    </div>
+</form>
+
+
+
+@* <form method="get" action="@Url.Action("GetAllStatistics")" class="search-form">
+    <div class="search-container">
+        <input type="text" name="searchQuery" value="@ViewBag.SearchQuery" 
+               placeholder="1 Milyon Veri İçinde Ara" class="search-input" />
+        <button type="submit" class="search-button">Ara</button>
+    </div>
+</form>
+ *@
 
 
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 <div class="container">
-    <br /><br />
+    <br />
     <table class="table table-bordered table-hover">
         <tr>
             <th>Country</th>
@@ -42,8 +61,8 @@
     </table>
 </div>
 
-<div>
-    @Html.PagedListPager(Model, page => Url.Action("GetAllStatistics", new { page }))
+<div style="margin-left:200px">
+    @Html.PagedListPager(Model, page => Url.Action("GetAllStatistics", new { page, searchQuery =ViewBag.SearchQuery }))
 </div>
 
 <style>
@@ -94,3 +113,4 @@
                 cursor: not-allowed;
             }
 </style>
+
